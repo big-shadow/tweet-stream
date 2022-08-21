@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using SimpleDataAccess.SchemaModels;
-using System;
 
 namespace SimpleDataAccess
 {
@@ -25,7 +24,10 @@ namespace SimpleDataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Tweet>().ToTable("Tweets");
-            modelBuilder.Entity<Tweet>().OwnsMany(x => x.Hashtags);
+            modelBuilder.Entity<Tweet>().OwnsMany(p => p.Hashtags, a =>
+            {
+                a.WithOwner(d => d.Tweet).HasForeignKey("TweetId");
+            });
         }
     }
 }

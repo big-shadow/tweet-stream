@@ -7,6 +7,7 @@ namespace Domain.Interfaces.Repositories
     public interface ITweetRepository
     {
         public Task<List<TweetDto>> FetchTweets();
+        public Task<StatisticsDto> FetchStatistics();
         public Task<TweetDto> CreateTweet(TweetDto tweet);
     }
 }

@@ -32,6 +32,35 @@ namespace SimpleDataAccess.Repositories
             }
         }
 
+        public async Task<StatisticsDto> FetchStatistics()
+        {
+            using (var context = new SimpleDataContext(_configuration))
+            {
+                var count = await context.Tweets
+                    .AsQueryable()
+                    .CountAsync();
+
+                var topTen = await context.Tweets
+                    .SelectMany(x => x.Hashtags)
+                    .AsQueryable()
+                    .GroupBy(x => x.Text)
+                    .OrderByDescending(x => x.Count())
+                    .Select(x => new TopHashtagDto()
+                    {
+                        Hashtag = x.Key,
+                        Uses = x.Count()
+                    })
+                    .Take(10)
+                    .ToListAsync();
+
+                return new StatisticsDto()
+                {
+                    TotalNumberOfTweetsReceived = count,
+                    TopTenHashtags = topTen
+                };
+            }
+        }
+
         public async Task<TweetDto> CreateTweet(TweetDto tweet)
         {
             using (var context = new SimpleDataContext(_configuration))
