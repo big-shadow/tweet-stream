@@ -8,9 +8,10 @@ namespace SimpleDataAccess.SchemaModels
         [Key]
         public int Id { get; set; }
 
+        public long TweetId { get; set; }
         public string Text { get; set; }
 
         [ForeignKey("TweetId")]
-        public virtual Tweet Tweet { get; set; }
+        public Tweet Tweet { get; set; }
     }
 }

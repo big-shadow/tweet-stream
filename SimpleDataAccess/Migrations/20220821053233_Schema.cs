@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SimpleDataAccess.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Schema : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,9 +11,9 @@ namespace SimpleDataAccess.Migrations
                 name: "Tweets",
                 columns: table => new
                 {
-                    TwitterId = table.Column<int>(type: "INTEGER", nullable: false)
+                    TwitterId = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    AuthorId = table.Column<int>(type: "INTEGER", nullable: false),
+                    AuthorId = table.Column<long>(type: "INTEGER", nullable: false),
                     Text = table.Column<string>(type: "TEXT", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
@@ -28,8 +28,8 @@ namespace SimpleDataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Text = table.Column<string>(type: "TEXT", nullable: true),
-                    TweetId = table.Column<int>(type: "INTEGER", nullable: false)
+                    TweetId = table.Column<long>(type: "INTEGER", nullable: false),
+                    Text = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -41,16 +41,6 @@ namespace SimpleDataAccess.Migrations
                         principalColumn: "TwitterId",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.InsertData(
-                table: "Tweets",
-                columns: new[] { "TwitterId", "AuthorId", "CreatedAt", "Text" },
-                values: new object[] { 1, 100, new DateTime(2022, 8, 20, 4, 30, 43, 338, DateTimeKind.Utc).AddTicks(4783), "Haha!" });
-
-            migrationBuilder.InsertData(
-                table: "Tweets",
-                columns: new[] { "TwitterId", "AuthorId", "CreatedAt", "Text" },
-                values: new object[] { 2, 101, new DateTime(2022, 8, 20, 4, 30, 43, 338, DateTimeKind.Utc).AddTicks(5219), "Boo!" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Hashtags_TweetId",

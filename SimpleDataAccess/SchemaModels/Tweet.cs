@@ -7,11 +7,11 @@ namespace SimpleDataAccess.SchemaModels
     public class Tweet
     {
         [Key]
-        public int TwitterId { get; set; }
+        public long TwitterId { get; set; }
 
-        public int AuthorId { get; set; }
+        public long AuthorId { get; set; }
         public string Text { get; set; }
         public DateTime CreatedAt { get; set; }
-        public virtual List<Hashtag> Hashtags { get; set; }
+        public List<Hashtag> Hashtags { get; set; }
     }
 }

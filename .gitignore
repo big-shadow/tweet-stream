@@ -398,3 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 
 Tweets.db
+appsettings.json

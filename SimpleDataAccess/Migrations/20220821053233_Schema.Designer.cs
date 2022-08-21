@@ -9,8 +9,8 @@ using SimpleDataAccess;
 namespace SimpleDataAccess.Migrations
 {
     [DbContext(typeof(SimpleDataContext))]
-    [Migration("20220820043043_Initial")]
-    partial class Initial
+    [Migration("20220821053233_Schema")]
+    partial class Schema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,11 +20,11 @@ namespace SimpleDataAccess.Migrations
 
             modelBuilder.Entity("SimpleDataAccess.SchemaModels.Tweet", b =>
                 {
-                    b.Property<int>("TwitterId")
+                    b.Property<long>("TwitterId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("AuthorId")
+                    b.Property<long>("AuthorId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreatedAt")
@@ -36,22 +36,6 @@ namespace SimpleDataAccess.Migrations
                     b.HasKey("TwitterId");
 
                     b.ToTable("Tweets");
-
-                    b.HasData(
-                        new
-                        {
-                            TwitterId = 1,
-                            AuthorId = 100,
-                            CreatedAt = new DateTime(2022, 8, 20, 4, 30, 43, 338, DateTimeKind.Utc).AddTicks(4783),
-                            Text = "Haha!"
-                        },
-                        new
-                        {
-                            TwitterId = 2,
-                            AuthorId = 101,
-                            CreatedAt = new DateTime(2022, 8, 20, 4, 30, 43, 338, DateTimeKind.Utc).AddTicks(5219),
-                            Text = "Boo!"
-                        });
                 });
 
             modelBuilder.Entity("SimpleDataAccess.SchemaModels.Tweet", b =>
@@ -65,7 +49,7 @@ namespace SimpleDataAccess.Migrations
                             b1.Property<string>("Text")
                                 .HasColumnType("TEXT");
 
-                            b1.Property<int>("TweetId")
+                            b1.Property<long>("TweetId")
                                 .HasColumnType("INTEGER");
 
                             b1.HasKey("Id");
