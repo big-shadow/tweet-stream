@@ -9,10 +9,10 @@ Architecture:
 - Tweet Ingestion microservice
 - Dot Net/EF Core
 - SQLite
+
+It would be really cool if Twitter's feed was event driven, rather than a stream. In that case I would recommend some serverless cloud functions/lambda. In the "real world" I would rather be a recipient than a requestor. But hey, it's a coding test.
  
-It would be really cool if Twitter's feed was event driven, rather than stream. In that case we could do some cloud functions/lambda. In the "real world" I would rather be a recipient than a requestor. But hey, it's a coding test.
- 
-You should find careful consideration has been given the application layer boundaries herein. Again, with more time to execute, I would have pitched a cloud solution. (Elastic search, firehose/queue, serverless ingestion service surface, etc!)
+You should find careful consideration has been given to the application layer boundaries herein. Again, with more time to execute, I would have pitched a cloud solution. (Elastic search, firehose/queue, serverless ingestion service surface, etc!)
  
 The `Domain` project is loosely coupled with both the API and service projects, and could totally be a nuget package in an enterprise environment. `Domain` dependencies are injected into both projects respectively. 
  
